@@ -11,7 +11,7 @@ class Character(object):
         self.stats = {'STR': 0, 'INT': 0, 'WIS': 0,
                       'DEX': 0, 'CON': 0, 'CHA': 0}
         self.char_class = ''
-        self.abilities = []
+        self.skills = []
         self.alignment = ''
 
     def get_name(self):

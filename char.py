@@ -56,6 +56,8 @@ class Character(object):
         if char_class == 'Barbarian':
             self.strength += 5
             self.intelligence -= 2
+            if self.intelligence < 1:
+                self.intelligence = 1
 
         if char_class == 'Bard':
             self.charisma += 5

@@ -20,7 +20,7 @@ class Character(object):
     def get_name(self):
         """Randomly pick a name for the character."""
         first = random.choice(['Bill', 'Bob', 'Betty', 'Lothar',
-                               'Grog', 'Melvvvar', 'Grok',
+                               'Grog', 'Melllvar', 'Grok',
                                'Sam', 'Zyzax', 'Grep'])
         last = random.choice(['Smith', 'Jones', 'Proudsteel',
                               'Darkclaw', 'Deathbringer',

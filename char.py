@@ -22,19 +22,21 @@ class Character(object):
         """Randomly pick a name for the character."""
         first = random.choice(['Bill', 'Bob', 'Betty', 'Lothar',
                                'Grog', 'Melllvar', 'Grok',
-                               'Sam', 'Zyzax', 'Grep',
+                               'Sam', 'Zyzax', 'Grep', 'Lars',
                                'Dirk', 'Gerion', 'Mordred',
-                               'Tormund', 'Myra', 'Larona',
-                               'Desra', 'Veryl', 'Quarr',
-                               'Brosephus', 'Guymon'])
+                               'Tormund', 'Myra', 'Larona', 'Mim',
+                               'Desra', 'Veryl', 'Quarr', 'Arfur',
+                               'Brosephus', 'Guymon', 'Cyril',
+                               'Klarg', 'Vik', 'Draia'])
         last = random.choice(['Smith', 'Jones', 'Proudsteel',
-                              'Darkclaw', 'Deathbringer',
-                              'Swiftfoot', 'Houlihan',
-                              'Loreweaver', 'Bloodtooth',
-                              'Greybeard', 'Whisperwind',
-                              'Malloy', 'Giantsbane',
-                              'Highloft', 'Wormfeed',
-                              'Farseer', 'McGillicutty'])
+                              'Darkclaw', 'Deathbringer', 'the Merciless',
+                              'Swiftfoot', 'Houlihan', 'Viletongue',
+                              'Loreweaver', 'Bloodtooth', 'the Eternal',
+                              'Greybeard', 'Whisperwind', 'Warhammer',
+                              'Malloy', 'Giantsbane', 'Coldheart',
+                              'Highloft', 'Wormfeed', 'Seaborn',
+                              'Farseer', 'McGillicutty', 'Laserbeak',
+                              'Gardner', 'Drakeslayer'])
 
         self.name = '{} {}'.format(first, last)
 
@@ -76,6 +78,9 @@ class Character(object):
         if char_class == 'Sorcerer':
             self.wisdom += 3
             self.intelligence += 2
+            self.strength -= 2
+            if self.strength < 1:
+                self.strength = 1
 
         if char_class == 'Rogue':
             self.dexterity += 3
@@ -133,8 +138,8 @@ if __name__ == '__main__':
     new_char.get_skills()
     new_char.get_alignment()
 
-    char_str = "Name: {} \n Class: {} \n".format(new_char.name,
-                                                 new_char.char_class)
+    char_str = " Name: {} \n Class: {} \n".format(new_char.name,
+                                                  new_char.char_class)
     align_str = 'Alignment: {} \n'.format(new_char.alignment)
     stats_str = ("STR: {} \n INT: {} \n WIS: {} \n"
                  " DEX: {} \n CON: {} \n"

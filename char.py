@@ -16,6 +16,7 @@ class Character(object):
         self.charisma = 0
         self.char_class = ''
         self.abilities = []
+        self.alignment = ''
 
     def get_name(self):
         """Randomly pick a name for the character."""
@@ -23,13 +24,17 @@ class Character(object):
                                'Grog', 'Melllvar', 'Grok',
                                'Sam', 'Zyzax', 'Grep',
                                'Dirk', 'Gerion', 'Mordred',
-                               'Tormund', 'Myra', 'Larona'])
+                               'Tormund', 'Myra', 'Larona',
+                               'Desra', 'Veryl', 'Quarr',
+                               'Brosephus', 'Guymon'])
         last = random.choice(['Smith', 'Jones', 'Proudsteel',
                               'Darkclaw', 'Deathbringer',
                               'Swiftfoot', 'Houlihan',
                               'Loreweaver', 'Bloodtooth',
                               'Greybeard', 'Whisperwind',
-                              'Malloy', 'Giantsbane'])
+                              'Malloy', 'Giantsbane',
+                              'Highloft', 'Wormfeed',
+                              'Farseer', 'McGillicutty'])
 
         self.name = '{} {}'.format(first, last)
 
@@ -45,10 +50,12 @@ class Character(object):
     def get_class(self):
         """Randomly select a character class."""
         char_class = random.choice(['Barbarian', 'Bard', 'Monk',
-                                    'Paladin', 'Ranger', 'Sorcerer'])
+                                    'Paladin', 'Ranger', 'Sorcerer',
+                                    'Rogue'])
 
         if char_class == 'Barbarian':
             self.strength += 5
+            self.intelligence -= 2
 
         if char_class == 'Bard':
             self.charisma += 5
@@ -65,7 +72,12 @@ class Character(object):
             self.dexterity += 5
 
         if char_class == 'Sorcerer':
-            self.wisdom += 5
+            self.wisdom += 3
+            self.intelligence += 2
+
+        if char_class == 'Rogue':
+            self.dexterity += 3
+            self.charisma += 2
 
         self.char_class = char_class
 
@@ -78,20 +90,37 @@ class Character(object):
             self.skills = ['Endurance', 'Intimidate']
 
         if self.char_class == 'Bard':
-            self.skills = ['Bluff', 'Diplomacy']
+            self.skills = random.sample(['Bluff', 'Diplomacy',
+                                         'Streetwise'], 2)
 
         if self.char_class == 'Monk':
-            self.skills = ['Athletics', 'Insight']
+            self.skills = random.sample(['Athletics', 'Insight',
+                                         'Streetwise'], 2)
 
         if self.char_class == 'Paladin':
-            self.skills = ['History', 'Heal']
+            self.skills = random.sample(['History', 'Religion',
+                                         'Endurance'], 2)
 
         if self.char_class == 'Ranger':
-            self.skills = ['Nature', 'Stealth']
+            self.skills = random.sample(['Nature', 'Dungeoneering',
+                                         'Perception'], 2)
 
         if self.char_class == 'Sorcerer':
-            self.skills = ['Arcana', 'Insight']
+            self.skills = random.sample(['Arcana', 'Insight', 'History'], 2)
 
+        if self.char_class == 'Rogue':
+            self.skills = random.sample(['Stealth', 'Thievery',
+                                         'Streetwise'], 2)
+
+    def get_alignment(self):
+        """Determine character's alignment."""
+        law_chaos = random.choice(['Lawful', 'Neutral', 'Chaotic'])
+        good_evil = random.choice(['Good', 'Neutral', 'Evil'])
+
+        if law_chaos == 'Neutral' and good_evil == 'Neutral':
+            law_chaos = 'True'
+
+        self.alignment = '{} {}'.format(law_chaos, good_evil)
 
 if __name__ == '__main__':
     """Generate and print a character."""
@@ -100,15 +129,18 @@ if __name__ == '__main__':
     new_char.get_stats()
     new_char.get_class()
     new_char.get_skills()
+    new_char.get_alignment()
 
     char_str = "Name: {} \n Class: {} \n".format(new_char.name,
                                                  new_char.char_class)
+    align_str = 'Alignment: {} \n'.format(new_char.alignment)
     stats_str = ("STR: {} \n INT: {} \n WIS: {} \n"
-                 "DEX: {} \n CON: {} \n CHA: {} \n").format(new_char.strength,
-                                                            new_char.intelligence,
-                                                            new_char.wisdom,
-                                                            new_char.dexterity,
-                                                            new_char.constitution,
-                                                            new_char.charisma)
+                 " DEX: {} \n CON: {} \n"
+                 " CHA: {} \n").format(new_char.strength,
+                                       new_char.intelligence,
+                                       new_char.wisdom,
+                                       new_char.dexterity,
+                                       new_char.constitution,
+                                       new_char.charisma)
     skill_str = 'Skills: {}'.format(new_char.skills)
-    print(char_str, stats_str, skill_str)
+    print(char_str, align_str, stats_str, skill_str)

@@ -8,12 +8,8 @@ class Character(object):
     def __init__(self):
         """Initialization of character."""
         self.name = ''
-        self.strength = 0
-        self.intelligence = 0
-        self.wisdom = 0
-        self.dexterity = 0
-        self.constitution = 0
-        self.charisma = 0
+        self.stats = {'STR': 0, 'INT': 0, 'WIS': 0,
+                      'DEX': 0, 'CON': 0, 'CHA': 0}
         self.char_class = ''
         self.abilities = []
         self.alignment = ''
@@ -21,9 +17,9 @@ class Character(object):
     def get_name(self):
         """Randomly pick a name for the character."""
         first = random.choice(['Bill', 'Bob', 'Betty', 'Lothar',
-                               'Grog', 'Melllvar', 'Grok',
+                               'Grog', 'Melllvar', 'Grok', 'Elmo',
                                'Sam', 'Zyzax', 'Grep', 'Lars',
-                               'Dirk', 'Gerion', 'Mordred',
+                               'Dirk', 'Gerion', 'Mordred', 'Yorick',
                                'Tormund', 'Myra', 'Larona', 'Mim',
                                'Desra', 'Veryl', 'Quarr', 'Arfur',
                                'Brosephus', 'Guymon', 'Cyril',
@@ -34,20 +30,16 @@ class Character(object):
                               'Loreweaver', 'Bloodtooth', 'the Eternal',
                               'Greybeard', 'Whisperwind', 'Warhammer',
                               'Malloy', 'Giantsbane', 'Coldheart',
-                              'Highloft', 'Wormfeed', 'Seaborn',
+                              'Highloft', 'Wormfeed', 'Seaborn', 'Brown',
                               'Farseer', 'McGillicutty', 'Laserbeak',
-                              'Gardner', 'Drakeslayer'])
+                              'Gardner', 'Drakeslayer', 'the Wise'])
 
         self.name = '{} {}'.format(first, last)
 
     def get_stats(self):
-        """Randomly determine a base stat."""
-        self.strength = random.randint(1, 20)
-        self.intelligence = random.randint(1, 20)
-        self.wisdom = random.randint(1, 20)
-        self.dexterity = random.randint(1, 20)
-        self.constitution = random.randint(1, 20)
-        self.charisma = random.randint(1, 20)
+        """Randomly determine base stats."""
+        for key in self.stats:
+            self.stats[key] = d20()
 
     def get_class(self):
         """Randomly select a character class."""
@@ -56,35 +48,35 @@ class Character(object):
                                     'Rogue'])
 
         if char_class == 'Barbarian':
-            self.strength += 5
-            self.intelligence -= 2
-            if self.intelligence < 1:
-                self.intelligence = 1
+            self.stats['STR'] += 5
+            self.stats['INT'] -= 2
+            if self.stats['INT'] < 1:
+                self.stats['INT'] = 1
 
         if char_class == 'Bard':
-            self.charisma += 5
+            self.stats['CHA'] += 5
 
         if char_class == 'Monk':
-            self.dexterity += 2
-            self.constitution += 3
+            self.stats['DEX'] += 2
+            self.stats['CON'] += 3
 
         if char_class == 'Paladin':
-            self.wisdom += 2
-            self.strength += 3
+            self.stats['WIS'] += 2
+            self.stats['STR'] += 3
 
         if char_class == 'Ranger':
-            self.dexterity += 5
+            self.stats['DEX'] += 5
 
         if char_class == 'Sorcerer':
-            self.wisdom += 3
-            self.intelligence += 2
-            self.strength -= 2
-            if self.strength < 1:
-                self.strength = 1
+            self.stats['WIS'] += 3
+            self.stats['INT'] += 2
+            self.stats['STR'] -= 2
+            if self.stats['STR'] < 1:
+                self.stats['STR'] = 1
 
         if char_class == 'Rogue':
-            self.dexterity += 3
-            self.charisma += 2
+            self.stats['DEX'] += 3
+            self.stats['CHA'] += 2
 
         self.char_class = char_class
 
@@ -129,6 +121,12 @@ class Character(object):
 
         self.alignment = '{} {}'.format(law_chaos, good_evil)
 
+
+def d20():
+    """Roll a D20."""
+    return random.randint(1, 20)
+
+
 if __name__ == '__main__':
     """Generate and print a character."""
     new_char = Character()
@@ -141,13 +139,7 @@ if __name__ == '__main__':
     char_str = " Name: {} \n Class: {} \n".format(new_char.name,
                                                   new_char.char_class)
     align_str = 'Alignment: {} \n'.format(new_char.alignment)
-    stats_str = ("STR: {} \n INT: {} \n WIS: {} \n"
-                 " DEX: {} \n CON: {} \n"
-                 " CHA: {} \n").format(new_char.strength,
-                                       new_char.intelligence,
-                                       new_char.wisdom,
-                                       new_char.dexterity,
-                                       new_char.constitution,
-                                       new_char.charisma)
+    stats_str = ''
+    stats_str = 'Abilities: {} \n'.format(new_char.stats)
     skill_str = 'Skills: {}'.format(new_char.skills)
     print(char_str, align_str, stats_str, skill_str)

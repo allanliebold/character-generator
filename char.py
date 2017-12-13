@@ -21,11 +21,15 @@ class Character(object):
         """Randomly pick a name for the character."""
         first = random.choice(['Bill', 'Bob', 'Betty', 'Lothar',
                                'Grog', 'Melllvar', 'Grok',
-                               'Sam', 'Zyzax', 'Grep'])
+                               'Sam', 'Zyzax', 'Grep',
+                               'Dirk', 'Gerion', 'Mordred',
+                               'Tormund', 'Myra', 'Larona'])
         last = random.choice(['Smith', 'Jones', 'Proudsteel',
                               'Darkclaw', 'Deathbringer',
                               'Swiftfoot', 'Houlihan',
-                              'Loreweaver', 'Bloodtooth'])
+                              'Loreweaver', 'Bloodtooth',
+                              'Greybeard', 'Whisperwind',
+                              'Malloy', 'Giantsbane'])
 
         self.name = '{} {}'.format(first, last)
 

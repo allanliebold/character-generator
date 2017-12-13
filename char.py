@@ -139,7 +139,6 @@ if __name__ == '__main__':
     char_str = " Name: {} \n Class: {} \n".format(new_char.name,
                                                   new_char.char_class)
     align_str = 'Alignment: {} \n'.format(new_char.alignment)
-    stats_str = ''
     stats_str = 'Abilities: {} \n'.format(new_char.stats)
     skill_str = 'Skills: {}'.format(new_char.skills)
     print(char_str, align_str, stats_str, skill_str)

@@ -38,6 +38,10 @@ class Character(object):
 
     def get_stats(self):
         """Randomly determine base stats."""
+        if self.char_class == '':
+            print('You must determine your character class first.')
+            return
+
         for key in self.stats:
             self.stats[key] = d20()
 
@@ -141,4 +145,6 @@ if __name__ == '__main__':
     align_str = 'Alignment: {} \n'.format(new_char.alignment)
     stats_str = 'Abilities: {} \n'.format(new_char.stats)
     skill_str = 'Skills: {}'.format(new_char.skills)
+    print('\n' + ('*' * 50) + '\n')
     print(char_str, align_str, stats_str, skill_str)
+    print('\n' + ('*' * 50) + '\n')

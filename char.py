@@ -38,10 +38,6 @@ class Character(object):
 
     def get_stats(self):
         """Randomly determine base stats."""
-        if self.char_class == '':
-            print('You must determine your character class first.')
-            return
-
         for key in self.stats:
             self.stats[key] = d20()
 
